@@ -24,11 +24,11 @@
 		/// <summary>Write the provided data to the data source.</summary>
 		/// <param name="input">The data that should be written to the data source.</param>
 		
-		Task WriteAsync(TWriteInput input);
+		Task<bool> WriteAsync(TWriteInput input);
 
 		//
 		/// <summary>Delete the data source.</summary>
 		
-		Task DeleteAsync();
+		Task<bool> DeleteAsync();
 	}
 }
