@@ -1,27 +1,41 @@
-﻿using System.IO;
-
-namespace Utilities.FileIO
+﻿namespace Utilities.FileIO
 {
 	public static partial class
 		FileSystem
 	{
 		//
-		/// <summary>Delete a specified directory.</summary>
+		/// <summary>
+		/// Delete the specified directory
+		/// </summary>
 		/// 
-		/// <param name="path">The path to the directory that should be deleted.</param>
-		/// <returns>Boolean (async) indicating the result of the operation.</returns>
+		/// <param name="path">
+		/// The path to the directory that should be deleted
+		/// </param>
+		/// 
+		/// <returns>
+		/// Boolean indicating the result of the operation
+		/// </returns>
+		//
 
 		public static Task<bool>
 			DeleteDirectory(string path)
 		{
-			return Task.Run(() =>
+			return Task.Run(async () =>
 			{
 				try
 				{
 					if (Directory.Exists(path))
 					{
+						bool isDeleted = false;
 						Directory.Delete(path, true);
-						return !Directory.Exists(path);
+
+						do {
+							isDeleted = !Directory.Exists(path);
+							if (!isDeleted) await Task.Delay(100);
+						}
+						while (!isDeleted);
+
+						return true;
 					}
 
 					DevTools.Warning("file-system/delete-directory", $"Could not find the directory ({path})");
@@ -37,22 +51,38 @@ namespace Utilities.FileIO
 		}
 
 		//
-		/// <summary>Delete a specified file.</summary>
+		/// <summary>
+		/// Delete the specified file
+		/// </summary>
 		/// 
-		/// <param name="filePath">The path to the file that should be deleted.</param>
-		/// <returns>Boolean (async) indicating the result of the operation.</returns>
+		/// <param name="filePath">
+		/// The path to the file that should be deleted
+		/// </param>
+		/// 
+		/// <returns>
+		/// Boolean indicating the result of the operation
+		/// </returns>
+		//
 
 		public static Task<bool>
 			DeleteFile(string filePath)
 		{
-			return Task.Run(() =>
+			return Task.Run(async () =>
 			{
 				try
 				{
 					if (File.Exists(filePath))
 					{
+						bool isDeleted = false;
 						File.Delete(filePath);
-						return !File.Exists(filePath);
+
+						do {
+							isDeleted = !File.Exists(filePath);
+							if (!isDeleted) await Task.Delay(100);
+						}
+						while (!isDeleted);
+
+						return true;
 					}
 
 					DevTools.Warning("file-system/delete-file", $"Could not find the file ({filePath})");

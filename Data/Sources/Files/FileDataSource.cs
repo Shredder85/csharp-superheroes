@@ -1,45 +1,82 @@
-﻿using Utilities.FileIO;
-using DAL.Interfaces;
+﻿using DAL.Interfaces;
+using Utilities.FileIO;
 
 namespace DAL.Sources.Files
 {
 	//
-	/// <summary>Object representing a file-based data source.</summary>
+	/// <summary>
+	/// Basic file-based data source with read and write operations
+	/// </summary>
+	//
 
 	public class
 		FileDataSource
-		: IWriteableDataSource<
-			string, string, string
-			>
+
+		: IReadableDataSource<
+			string, string
+			>,
+		  IWriteableDataSource<
+			  string, string
+			  >
 	{
-		public FileDataSource(string filePath) => Source = filePath;
-
 		//
-		/// <summary>Read data from the source file (async).</summary>
-		/// <returns></returns>
-
-		public async virtual Task<string?>
-			ReadAsync() => await FileSystem.ReadAsync(Source);
-
-		//
-		/// <summary>Write data to the source file (async).</summary>
+		/// <summary>
+		/// Set the path to the source file
+		/// </summary>
 		/// 
-		/// <param name="input"></param>
-		/// <returns></returns>
+		/// <param name="filePath">
+		/// The path to the source file
+		/// </param>
+		//
 
-		public async virtual Task<bool>
-			WriteAsync(string input) => await FileSystem.WriteAsync(Source, input);
+		public FileDataSource(string filePath)=> Source = filePath;
 
 		//
-		/// <summary>Delete the source file (async).</summary>
-		/// <returns></returns>
+		/// <summary>
+		/// Read the content of the source file
+		/// </summary>
+		/// 
+		/// <returns>
+		/// string | null
+		/// </returns>
+		//
 
-		public async virtual Task<bool>
-			DeleteAsync() => await FileSystem.DeleteFile(Source);
+		public async Task<string?> ReadAsync()=> await FileSystem.ReadAsync(Source);
 
 		//
-		/// <summary></summary>
+		/// <summary>
+		/// Write the provided string to the source file
+		/// </summary>
+		/// 
+		/// <param name="input">
+		/// The string that should be written to the source file
+		/// </param>
+		/// 
+		/// <returns>
+		/// Boolean indicating the result of the operation
+		/// </returns>
+		//
 
-		public string Source { get; init; } = string.Empty;
+		public async Task<bool> WriteAsync(string input)=> await FileSystem.WriteAsync(Source, input);
+
+		//
+		/// <summary>
+		/// Delete the source file
+		/// </summary>
+		/// 
+		/// <returns>
+		/// Boolean indicating the result of the operation
+		/// </returns>
+		//
+
+		public Task<bool> DeleteAsync()=> FileSystem.DeleteFile(Source);
+
+		//
+		/// <summary>
+		/// The path to the source file
+		/// </summary>
+		//
+
+		public string Source { get; init; }
 	}
 }
