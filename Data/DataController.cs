@@ -1,15 +1,24 @@
-﻿using DAL.Sources.Files;
-using DAL.Stores;
+﻿using DAL.Repositories;
+using DAL.Sources.Files;
 using Models;
 
 namespace DAL
 {
-	using SuperheroCollection = Dictionary<string, Superhero>;
+	//
+	/// <summary>
+	/// 
+	/// </summary>
+	//
 
 	public static class
 		DataController
 	{
-		public static SuperheroStore Superheroes { get; } = new(
-			new JsonFile<SuperheroCollection>("superheroes.json"));
+		//
+		/// <summary>
+		/// 
+		/// </summary>
+		//
+
+		public static SuperheroRepository Superheroes { get; } = new();
 	}
 }

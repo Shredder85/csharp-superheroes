@@ -19,7 +19,7 @@ namespace DAL.Sources.Files
 
 		: FileDataSource
 
-		where TCollection : notnull
+		where TCollection : notnull, new()
 	{
 		//
 		/// <summary>
