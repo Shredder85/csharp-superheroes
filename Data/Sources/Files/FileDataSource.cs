@@ -3,13 +3,13 @@ using Utilities.FileIO;
 
 namespace DAL.Sources.Files
 {
-    //
-    /// <summary>
-    /// Basic file-based data source with read and write operations
-    /// </summary>
-    //
+	//
+	/// <summary>
+	/// Basic file-based data source with read and write operations
+	/// </summary>
+	//
 
-    public class
+	public class
 		FileDataSource
 
 		: IReadableDataSource<

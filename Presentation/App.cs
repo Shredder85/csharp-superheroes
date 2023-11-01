@@ -16,25 +16,33 @@ using Utilities;
 
 namespace PL
 {
+	//
+	/// <summary>
+	/// Base application class
+	/// </summary>
+	//
+
 	public partial class App : Form
 	{
 		public App()
 		{
+			//
+			/// Application initialization
+			//
+
 			try
 			{
 				InitializeComponent();
-				CustomizeLookAndFeel();
 			}
+
+			//
+			/// Catch any drifting exceptions to prevent crashing
+			//
 
 			catch (Exception exception)
 			{
 				DevTools.Error("app", exception, log: true);
 			}
-		}
-
-		private void CustomizeLookAndFeel()
-		{
-
 		}
 	}
 }

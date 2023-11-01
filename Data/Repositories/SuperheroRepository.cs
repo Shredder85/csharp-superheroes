@@ -1,19 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL.Sources.Files;
+using Models;
 
 namespace DAL.Repositories
 {
-	using SuperheroCollection
+	//
+	/// <summary>
+	/// Superhero repository (represents a table in SQL terms)
+	/// </summary>
+	//
 
 	public class
 		SuperheroRepository
-		
 		: Repository<
-			
+			JsonFile<Superhero>,
+			Superhero
 			>
 	{
+		//
+		/// <summary>
+		/// Initiate the repository, supplying a source to the data store
+		/// </summary>
+		//
+
+		public SuperheroRepository(): base(
+			new JsonFile<Superhero>("superheroes.json")
+			) { }
 	}
 }

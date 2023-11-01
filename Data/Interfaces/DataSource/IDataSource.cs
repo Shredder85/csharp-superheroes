@@ -1,6 +1,6 @@
 ﻿namespace DAL.Interfaces.DataSource
 {
-    public interface
+	public interface
         IDataSource<
             TSource
             >

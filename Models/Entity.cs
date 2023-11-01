@@ -3,6 +3,12 @@ using System.ComponentModel;
 
 namespace Models
 {
+	//
+	/// <summary>
+	/// Abstract base class for all entities
+	/// </summary>
+	//
+
 	public abstract class
 		Entity
 

@@ -15,12 +15,20 @@
 		public static Task<bool>
 			WriteAsync(string path, string content, bool overwrite = true)
 		{
-			return Task.Run(async ()=>
+			return Task.Run(()=>
 			{
 				try
 				{
-					using var writer = new StreamWriter(path, append: !overwrite);
-					await writer.WriteAsync(content);
+					lock(typeof(FileSystem))
+					{
+						using var file = new FileStream(
+							path, share: FileShare.None, access: FileAccess.Write,
+							mode: overwrite ? FileMode.Open : FileMode.Append
+							);
+
+						using var writer = new StreamWriter(file);
+						writer.WriteAsync(content);
+					}
 
 					return true;
 				}

@@ -1,12 +1,10 @@
 ﻿using DAL.Repositories;
-using DAL.Sources.Files;
-using Models;
 
 namespace DAL
 {
 	//
 	/// <summary>
-	/// 
+	/// Represents a database in SQL terms
 	/// </summary>
 	//
 
@@ -15,7 +13,7 @@ namespace DAL
 	{
 		//
 		/// <summary>
-		/// 
+		/// The superhero repository (representing a table in SQL terms)
 		/// </summary>
 		//
 

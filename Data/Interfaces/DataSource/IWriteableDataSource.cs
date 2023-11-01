@@ -1,21 +1,21 @@
 ﻿namespace DAL.Interfaces.DataSource
 {
-    //
-    /// <summary>
-    /// Generic data source interface that allows you to read
-    /// data from and write data to a data source.
-    /// </summary>
-    /// 
-    /// <typeparam name="TSource">
-    /// The anonymous type used as a source
-    /// </typeparam>
-    /// 
-    /// <typeparam name="TWriteInput">
-    /// The anonymous type used as input
-    /// </typeparam>
-    //
+	//
+	/// <summary>
+	/// Generic data source interface that allows you to read
+	/// data from and write data to a data source.
+	/// </summary>
+	/// 
+	/// <typeparam name="TSource">
+	/// The anonymous type used as a source
+	/// </typeparam>
+	/// 
+	/// <typeparam name="TWriteInput">
+	/// The anonymous type used as input
+	/// </typeparam>
+	//
 
-    public interface
+	public interface
         IWriteableDataSource<
             TSource,
             TWriteInput

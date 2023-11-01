@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using DAL.Interfaces;
+using Models;
+using Newtonsoft.Json;
 
 namespace DAL.Sources.Files
 {
@@ -14,12 +16,15 @@ namespace DAL.Sources.Files
 
 	public class
 		JsonFile<
-			TCollection
+			TEntity
 			>
 
-		: FileDataSource
+		: FileDataSource,
+		IDataStoreSource<
+			TEntity
+			>
 
-		where TCollection : notnull, new()
+		where TEntity : Entity
 	{
 		//
 		/// <summary>
@@ -43,11 +48,12 @@ namespace DAL.Sources.Files
 		/// </returns>
 		//
 
-		public async Task<TCollection?> Load()
+		public async Task<Dictionary<string, TEntity>?>
+			Load()
 		{
 			if (await ReadAsync() is string json)
 			{
-				return JsonConvert.DeserializeObject<TCollection>(json);
+				return JsonConvert.DeserializeObject<Dictionary<string, TEntity>>(json);
 			}
 
 			return default;
@@ -67,7 +73,8 @@ namespace DAL.Sources.Files
 		/// </returns>
 		//
 
-		public async Task<bool> Save(TCollection collection)
+		public async Task<bool>
+			Save(Dictionary<string, TEntity> collection)
 		{
 			return await WriteAsync(
 				JsonConvert.SerializeObject(collection)
