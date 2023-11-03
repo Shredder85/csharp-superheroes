@@ -1,5 +1,4 @@
-﻿using DAL.Interfaces;
-using Models;
+﻿using Models;
 
 namespace DAL
 {

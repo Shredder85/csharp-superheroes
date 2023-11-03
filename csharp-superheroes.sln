@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "Business\BLL.csproj", "{6879FA42-178F-416E-A62E-4F086F09BA42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EQuery", "EQuery\EQuery.csproj", "{318D68A7-81AC-4A15-8F12-8EC536E9A43C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LQuery", "EQuery\LQuery.csproj", "{318D68A7-81AC-4A15-8F12-8EC536E9A43C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

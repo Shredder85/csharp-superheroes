@@ -1,7 +1,6 @@
-﻿using DAL.Interfaces.DataSource;
-using Utilities.FileIO;
+﻿using Utilities.FileIO;
 
-namespace DAL.Sources.Files
+namespace DAL
 {
 	//
 	/// <summary>

@@ -1,8 +1,7 @@
-﻿using DAL.Interfaces;
-using Models;
+﻿using Models;
 using Newtonsoft.Json;
 
-namespace DAL.Sources.Files
+namespace DAL
 {
 	//
 	/// <summary>

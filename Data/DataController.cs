@@ -1,6 +1,4 @@
-﻿using DAL.Repositories;
-
-namespace DAL
+﻿namespace DAL
 {
 	//
 	/// <summary>

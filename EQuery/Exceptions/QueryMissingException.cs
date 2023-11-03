@@ -1,4 +1,4 @@
-﻿namespace EQuery.Exceptions
+﻿namespace LQuery
 {
 	//
 	/// <summary>

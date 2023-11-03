@@ -1,7 +1,6 @@
-﻿using DAL.Sources.Files;
-using Models;
+﻿using Models;
 
-namespace DAL.Repositories
+namespace DAL
 {
 	//
 	/// <summary>

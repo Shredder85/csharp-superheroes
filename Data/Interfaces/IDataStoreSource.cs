@@ -1,6 +1,6 @@
 ﻿using Models;
 
-namespace DAL.Interfaces
+namespace DAL
 {
 	//
 	/// <summary>
