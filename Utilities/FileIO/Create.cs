@@ -4,10 +4,18 @@
 		FileSystem
 	{
 		//
-		/// <summary>Create a directory if it doesn't exist.</summary>
+		/// <summary>
+		/// Create a directory if it doesn't exist
+		/// </summary>
 		/// 
-		/// <param name="path">The path to the directory</param>
-		/// <returns>Boolean (async) indicating the result of the operation.</returns>
+		/// <param name="path">
+		/// The path to the directory
+		/// </param>
+		/// 
+		/// <returns>
+		/// Boolean (async) indicating the result of the operation
+		/// </returns>
+		//
 
 		public static Task<bool>
 			EnsureDirectoryExists(string path)
@@ -37,10 +45,18 @@
 		}
 
 		//
-		/// <summary>Create a file if it doesn't exist.</summary>
+		/// <summary>
+		/// Create a file if it doesn't exist
+		/// </summary>
 		/// 
-		/// <param name="filePath">The path to the file</param>
-		/// <returns>Boolean (async) indicating the result of the operation.</returns>
+		/// <param name="filePath">
+		/// The path to the file
+		/// </param>
+		/// 
+		/// <returns>
+		/// Boolean indicating the result of the operation
+		/// </returns>
+		//
 
 		public async static Task<bool>
 			EnsureFileExists(string filePath)

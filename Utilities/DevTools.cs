@@ -5,19 +5,33 @@ using Utilities.FileIO;
 namespace Utilities
 {
 	//
-	/// <summary>Provides methods that help out in presenting and
-	/// logging information, warnings and exceptions.</summary>
+	/// <summary>
+	/// Provides methods that help out in presenting and
+	/// logging information, warnings and exceptions.
+	/// </summary>
+	//
 
 	public static class 
 		DevTools
 	{
 		//
-		/// <summary>Display information about the provided exception,
-		/// and optionally save the event to the error log.</summary>
+		/// <summary>
+		/// Display information about the provided exception,
+		/// and optionally save the event to the error log.
+		/// </summary>
 		/// 
-		/// <param name="trace">The trace identifier used to located the source.</param>
-		/// <param name="exception">The thrown Exception object.</param>
-		/// <param name="log">Boolean specifying whether the error should be saved to the log.</param>
+		/// <param name="trace">
+		/// The trace identifier used to located the source
+		/// </param>
+		/// 
+		/// <param name="exception">
+		/// The thrown Exception object
+		/// </param>
+		/// 
+		/// <param name="log">
+		/// Boolean specifying whether the error should be saved to the log.
+		/// </param>
+		//
 
 		public async static void
 			Error(string trace, Exception exception, bool log = false)
@@ -54,29 +68,56 @@ namespace Utilities
 		}
 
 		//
-		/// <summary>Print the provided warning.</summary>
+		/// <summary>
+		/// Print the provided warning
+		/// </summary>
 		/// 
-		/// <param name="trace">The trace identifier used to located the source.</param>
-		/// <param name="message">The warning that should be printed to the debug output.</param>
+		/// <param name="trace">
+		/// The trace identifier used to located the source
+		/// </param>
+		/// 
+		/// <param name="message">
+		/// The warning that should be printed to the debug output
+		/// </param>
+		//
 
 		public static void
 			Warning(string trace, string message) => Output("warning", trace, message);
 
 		//
-		/// <summary>Print the provided event info.</summary>
+		/// <summary>
+		/// Print the provided event info.
+		/// </summary>
 		/// 
-		/// <param name="trace">The trace identifier used to located the source.</param>
-		/// <param name="message">The warning that should be printed to the debug output.</param>
+		/// <param name="trace">
+		/// The trace identifier used to located the source
+		/// </param>
+		/// 
+		/// <param name="message">
+		/// The warning that should be printed to the debug output
+		/// </param>
+		//
 
 		public static void
 			Event(string trace, string message) => Output("event", trace, message);
 
 		//
-		/// <summary>Print a message to the debug output.</summary>
+		/// <summary>
+		/// Print a message to the debug output.
+		/// </summary>
 		/// 
-		/// <param name="type">The type of message</param>
-		/// <param name="trace">The trace identifier used to located the source.</param>
-		/// <param name="message">The message that should be displayed</param>
+		/// <param name="type">
+		/// The type of message
+		/// </param>
+		/// 
+		/// <param name="trace">
+		/// The trace identifier used to located the source
+		/// </param>
+		/// 
+		/// <param name="message">
+		/// The message that should be displayed
+		/// </param>
+		//
 
 		public static void
 			Output(string type, string trace, string message)
@@ -88,19 +129,43 @@ namespace Utilities
 		}
 
 		//
-		/// <summary>Controls whether output should be printed.</summary>
+		/// <summary>
+		/// Controls whether output should be printed.
+		/// </summary>
+		//
 
 		public static bool Enabled { get; set; } = true;
 	}
 
 	//
-	/// <summary>Object model used when logging exceptions.</summary>
+	/// <summary>
+	/// Object model used when logging exceptions
+	/// </summary>
+	//
 
 	public class ExceptionInfo
 	{
+		//
+		/// <summary>
+		/// The name of the exception
+		/// </summary>
+		//
+
 		public string Type { get; set; } = string.Empty;
 
+		//
+		/// <summary>
+		/// The information message about the exception
+		/// </summary>
+		//
+
 		public string Message { get; set; } = string.Empty;
+
+		//
+		/// <summary>
+		/// The stack trace for the exception
+		/// </summary>
+		//
 
 		public string StackTrace { get; set; } = string.Empty;
 	}

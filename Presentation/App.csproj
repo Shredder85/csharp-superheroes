@@ -10,13 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Business\BLL.csproj" />
-    <ProjectReference Include="..\Data\DAL.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
 
 </Project>

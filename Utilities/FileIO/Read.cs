@@ -4,10 +4,18 @@
 		FileSystem
 	{
 		//
-		/// <summary>Read the content of the specified file.</summary>
+		/// <summary>
+		/// Read the content of the specified file
+		/// </summary>
 		/// 
-		/// <param name="filePath">The path to the file.</param>
-		/// <returns>The content of the specified file, or null if the read failed.</returns>
+		/// <param name="filePath">
+		/// The path to the file
+		/// </param>
+		/// 
+		/// <returns>
+		/// The content of the specified file, or null if the read failed
+		/// </returns>
+		//
 
 		public static async
 			Task<string?> ReadAsync(string filePath)

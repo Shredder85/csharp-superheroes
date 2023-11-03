@@ -2,7 +2,6 @@
 
 namespace Models
 {
-	//
 	/// <summary>
 	/// Interface that define the base model for entity classes.
 	/// </summary>
@@ -10,7 +9,6 @@ namespace Models
 	/// <typeparam name="TIdentifier">
 	/// The type of object used as an identifier.
 	/// </typeparam>
-	//
 
 	public interface
 		IEntity<
@@ -22,7 +20,7 @@ namespace Models
 		/// <summary>
 		/// The identifier used to uniquely identify an entity.
 		/// </summary>
-		/// 
+		
 		TIdentifier Id { get; }
 	}
 }
