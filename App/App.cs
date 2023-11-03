@@ -1,4 +1,4 @@
-using Utils;
+using Utils.Animation;
 using Utils.Debug;
 
 //
@@ -45,32 +45,16 @@ namespace App
 			}
 		}
 
-		private async void
+		private void
 			OnResizeButtonClick(object? sender, MouseEventArgs e)
 		{
-
-		}
-
-		//{
-			//Print.Log("resize", "button clicked");
+			Animation.Resize(this,
+				Width == 200 ? 600 : 200,
+				Height == 600 ? 450 : 600,
 				
-			//int initialWidth = Width;
-			//int initialHeight = Height;
-
-			//Print.Log("resize", $"width: {initialWidth}, height: {initialHeight}");
-
-			//int desiredWidth = Convert.ToInt32(initialWidth * 0.9);
-			//int desiredHeight = Convert.ToInt32(initialHeight * 0.9);
-
-			//Print.Log("resize", $"d-width: {desiredWidth}, d-height: {desiredHeight}");
-
-			//while (Width > desiredWidth)
-			//{
-			//	Width -= 5;
-			//	Height -= 5;
-
-			//	await Task.Delay(1);
-			//}
-		//}
+				delayPerStep: 5,
+				callback: ()=> Print.Log("animate", "animation completed")
+				);
+		}
 	}
 }
