@@ -1,4 +1,6 @@
-﻿namespace Utilities.FileIO
+﻿using Utils.Debug;
+
+namespace Utils.FileIO
 {
 	public static partial class
 		FileSystem
@@ -13,7 +15,7 @@
 		/// </param>
 		/// 
 		/// <returns>
-		/// The content of the specified file, or null if the read failed
+		/// The content of the specified file | null
 		/// </returns>
 		//
 
@@ -39,10 +41,10 @@
 
 			catch
 			{
-				DevTools.Warning("file-system/read-async", $"Unable to read file ({filePath})");
-				
-				return null;
+				Print.Warn("read-async", $"Unable to read file ({filePath})");
 			}
+
+			return default;
 		}
 	}
 }

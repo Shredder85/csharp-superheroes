@@ -1,4 +1,6 @@
-﻿namespace Utilities.FileIO
+﻿using Utils.Debug;
+
+namespace Utils.FileIO
 {
 	public static partial class
 		FileSystem
@@ -9,11 +11,11 @@
 		/// </summary>
 		/// 
 		/// <param name="path">
-		/// The path to the directory
+		/// The path to the directory that should be checked
 		/// </param>
 		/// 
 		/// <returns>
-		/// Boolean (async) indicating the result of the operation
+		/// Boolean indicating the result of the operation
 		/// </returns>
 		//
 
@@ -37,7 +39,7 @@
 
 				catch (Exception exception)
 				{
-					DevTools.Error("file-system/ensure-directory-exists", exception);
+					Print.Error("ensure-directory-exists", exception);
 				}
 
 				return false;
@@ -50,7 +52,7 @@
 		/// </summary>
 		/// 
 		/// <param name="filePath">
-		/// The path to the file
+		/// The path to the file that should be checked
 		/// </param>
 		/// 
 		/// <returns>
@@ -68,6 +70,9 @@
 					if (!File.Exists(filePath))
 					{
 						File.Create(filePath);
+
+						do { await Task.Delay(100); }
+						while (!File.Exists(filePath));
 					}
 
 					return File.Exists(filePath);
@@ -76,7 +81,7 @@
 
 			catch (Exception exception)
 			{
-				DevTools.Error("file-system/ensure-file-exists", exception);
+				Print.Error("ensure-file-exists", exception);
 			}
 
 			return false;

@@ -1,4 +1,4 @@
-﻿namespace PL
+﻿namespace App
 {
 	partial class App
 	{
@@ -28,18 +28,33 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			ResizeButton = new Button();
 			SuspendLayout();
 			// 
-			// Window
+			// ResizeButton
 			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
+			ResizeButton.Anchor = AnchorStyles.None;
+			ResizeButton.Location = new Point(366, 255);
+			ResizeButton.Name = "ResizeButton";
+			ResizeButton.Size = new Size(94, 29);
+			ResizeButton.TabIndex = 0;
+			ResizeButton.Text = "Resize me";
+			ResizeButton.UseVisualStyleBackColor = true;
+			// 
+			// App
+			// 
+			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(1104, 671);
-			Name = "Window";
-			Text = "Superheroes - a learning project - C#";
+			BackColor = Color.FromArgb(51, 51, 51);
+			ClientSize = new Size(800, 550);
+			Controls.Add(ResizeButton);
+			Name = "App";
+			Text = "Form1";
 			ResumeLayout(false);
 		}
 
 		#endregion
+
+		private Button ResizeButton;
 	}
 }
