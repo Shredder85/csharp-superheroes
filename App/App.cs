@@ -48,11 +48,10 @@ namespace App
 		private void
 			OnResizeButtonClick(object? sender, MouseEventArgs e)
 		{
-			Animation.Resize(this,
-				Width == 200 ? 600 : 200,
-				Height == 600 ? 450 : 600,
-				
-				delayPerStep: 5,
+			Animation.Resize(
+				element: this,
+				targetWidth: new Random(Guid.NewGuid().ToString().GetHashCode()).Next(300,750),
+				targetHeight: new Random(Guid.NewGuid().ToString().GetHashCode()).Next(300, 750),
 				callback: ()=> Print.Log("animate", "animation completed")
 				);
 		}

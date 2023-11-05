@@ -1,80 +1,137 @@
-﻿namespace Utils.Animation
+﻿using Utils.Debug;
+using System.Reflection;
+
+namespace Utils.Animation
 {
 	static public class
 		Animation
 	{
 		//
 		/// <summary>
-		/// Resize the control to the specified width and height
+		/// Resize animation for Windows Forms Control objects
 		/// </summary>
-		/// <param name="element"></param>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
-		/// <param name="pixelsPerStep"></param>
-		/// <param name="delayPerStep"></param>
+		/// 
+		/// <param name="element">
+		/// The Control object that should be resized
+		/// </param>
+		/// 
+		/// <param name="targetWidth">
+		/// The new width for the specified object
+		/// </param>
+		/// 
+		/// <param name="targetHeight">
+		/// The new height for the specified object
+		/// </param>
+		/// 
+		/// <param name="tickRate">
+		/// The number of frames for the animation
+		/// </param>
+		/// 
+		/// <param name="delayPerTick">
+		/// The delay between each animation frame (in milliseconds)
+		/// </param>
+		/// 
+		/// <param name="callback">
+		/// Delegate that should be invoked when the animation is completed
+		/// </param>
 		//
 
 		static public void
 			Resize(
 				Control element,
 				
-				int width,
-				int height,
-				int pixelsPerStep = 10,
-				int delayPerStep = 5,
-
+				int targetWidth,
+				int targetHeight,
+				
+				int tickRate = 5,
+				int delayPerTick = 10,
 				Action? callback = null
 			)
 		{
-			bool incrementWidth = element.Width < width;
-			bool incrementHeight = element.Height < height;
-
-			int widthChange = incrementWidth ? width - element.Width : element.Width - width;
-			int heightChange = incrementHeight ? height - element.Height : element.Height - height;
-
-			var widthPixelsPerStep = (int) Math.Ceiling((double)(widthChange / pixelsPerStep));
-			var heightPixelsPerStep = (int) Math.Ceiling((double)(heightChange / pixelsPerStep));
-
-			_ = Task.Run(async () =>
+			Task<bool> resizer(
+				Control element,
+				string propertyName,
+				int targetSize
+				)
 			{
-				while (true)
+				const int lowestAllowedChangePerTick = 5;
+
+				return Task.Run(async () =>
 				{
-					bool widthReached = element.Width == width;
-					bool heightReached = element.Height == height;
-
-					if (widthReached && heightReached) break;
-
-					if (!widthReached)
+					try
 					{
-						int change = incrementWidth
+						if (element.GetType().GetProperty(propertyName)
+							is PropertyInfo property)
+						{
+							var initialSize = (int)(property.GetValue(element) ?? 0);
+							bool isIncrease = initialSize < targetSize;
 
-							? ((element.Width + widthPixelsPerStep) > width
-								? width - element.Width : widthPixelsPerStep)
+							int totalChange = isIncrease ? targetSize - initialSize : initialSize - targetSize;
+							int changePerTick = totalChange / tickRate;
 
-							: ((element.Width - widthPixelsPerStep) < width
-								? element.Width - width : widthPixelsPerStep);
+							if (changePerTick < lowestAllowedChangePerTick)
+							{
+								element.Invoke(() => property.SetValue(element, targetSize));
+							}
+							else
+							{
+								for (int i = 1; i <= tickRate; i++)
+								{
+									element.Invoke(() =>
+									{
+										property.SetValue(element,
+											initialSize + (i * (isIncrease ? changePerTick : -changePerTick))
+											);
+									});
 
-						element.Invoke(() => element.Width += incrementWidth ? change : -change);
+									await Task.Delay(delayPerTick);
+								}
+							}
+						}
+
+						return true;
 					}
 
-					if (!heightReached)
+					catch (Exception x)
 					{
-						int change = incrementHeight
-
-							? ((element.Height + heightPixelsPerStep) > height
-								? height - element.Height : heightPixelsPerStep)
-
-							: ((element.Height - heightPixelsPerStep) < height
-								? element.Height - height : heightPixelsPerStep);
-
-						element.Invoke(() => element.Height += incrementHeight ? change : -change);
+						Print.Error("resizer", x);
 					}
 
-					await Task.Delay(delayPerStep);
-				}
+					return false;
+				});
+			}
 
-				callback?.Invoke();
-			});
+			_ = Task.Run(
+				async ()=>
+				{
+					try
+					{
+						await Task.WhenAll(
+							resizer(
+								element,
+								"Width",
+								targetWidth
+								),
+							resizer(
+								element,
+								"Height",
+								targetHeight
+								)
+							);
+
+						element.Invoke(() => {
+							element.Width = targetWidth;
+							element.Height = targetHeight;
+						});
+
+						callback?.Invoke();
+					}
+
+					catch (Exception x)
+					{
+						Print.Error("resize", x);
+					}
+				});
 		}
 	}
 }
